@@ -15,9 +15,12 @@ pygame.display.set_caption('Navinha')
 METEOR_WIDTH = 50
 METEOR_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
+
+# Carrega imagem da nave
+ship_img = pygame.image.load('referencia/assets/img/playerShip1_orange.png').convert_alpha()
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -45,6 +48,16 @@ class Meteor(pygame.sprite.Sprite):
             self.speedx = random.randint(-3, 3)
             self.speedy = random.randint(2, 9)
 
+# Nova classe Ship (nave do jogador)
+class Ship(pygame.sprite.Sprite):
+    def __init__(self, img):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = img
+        self.rect = self.image.get_rect()
+        # posiciona a nave no centro em X e 10 pixels acima do final em Y
+        self.rect.centerx = WIDTH // 2
+        self.rect.bottom = HEIGHT - 10
+
 game = True
 # Variável para o ajuste de velocidade
 clock = pygame.time.Clock()
@@ -53,9 +66,12 @@ FPS = 30
 # Criando um grupo de meteoros
 all_meteors = pygame.sprite.Group()
 # Criando os meteoros
-for i in range(8):
+for i in range(15):
     meteor = Meteor(meteor_img)
     all_meteors.add(meteor)
+
+# Cria a nave
+ship = Ship(ship_img)
 
 # ===== Loop principal =====
 while game:
@@ -76,9 +92,10 @@ while game:
     window.blit(background, (0, 0))
     # Desenhando meteoros
     all_meteors.draw(window)
+    # Desenhando a nave
+    window.blit(ship.image, ship.rect)
 
     pygame.display.update()  # Mostra o novo frame para o jogador
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
-
