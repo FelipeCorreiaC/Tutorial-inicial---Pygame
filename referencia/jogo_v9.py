@@ -17,10 +17,10 @@ METEOR_HEIGHT = 38
 SHIP_WIDTH = 50
 SHIP_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
-ship_img = pygame.image.load('assets/img/playerShip1_orange.png').convert_alpha()
+ship_img = pygame.image.load('referencia/assets/img/playerShip1_orange.png').convert_alpha()
 ship_img = pygame.transform.scale(ship_img, (SHIP_WIDTH, SHIP_HEIGHT))
 
 # ----- Inicia estruturas de dados
@@ -34,17 +34,17 @@ class Ship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
-        self.speedx = 0
+        self.speedx = -5
 
     def update(self):
         # Atualização da posição da nave
         self.rect.x += self.speedx
 
         # Mantem dentro da tela
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
+        # if self.rect.right > WIDTH:
+        #     self.rect.right = WIDTH
+        # if self.rect.left < 0:
+        #     self.rect.left = 0
 
 class Meteor(pygame.sprite.Sprite):
     def __init__(self, img):
