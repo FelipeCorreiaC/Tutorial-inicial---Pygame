@@ -19,19 +19,19 @@ METEOR_HEIGHT = 38
 SHIP_WIDTH = 50
 SHIP_HEIGHT = 38
 assets = {}
-assets['background'] = pygame.image.load('assets/img/starfield.png').convert()
-assets['meteor_img'] = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+assets['background'] = pygame.image.load('referencia/assets/img/starfield.png').convert()
+assets['meteor_img'] = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 assets['meteor_img'] = pygame.transform.scale(assets['meteor_img'], (METEOR_WIDTH, METEOR_HEIGHT))
-assets['ship_img'] = pygame.image.load('assets/img/playerShip1_orange.png').convert_alpha()
+assets['ship_img'] = pygame.image.load('referencia/assets/img/playerShip1_orange.png').convert_alpha()
 assets['ship_img'] = pygame.transform.scale(assets['ship_img'], (SHIP_WIDTH, SHIP_HEIGHT))
-assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
+assets['bullet_img'] = pygame.image.load('referencia/assets/img/laserRed16.png').convert_alpha()
 
 # Carrega os sons do jogo
-pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.load('referencia/assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
 pygame.mixer.music.set_volume(0.4)
-boom_sound = pygame.mixer.Sound('assets/snd/expl3.wav')
-destroy_sound = pygame.mixer.Sound('assets/snd/expl6.wav')
-assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+assets['boom_sound'] = pygame.mixer.Sound('referencia/assets/snd/expl3.wav')
+assets['destroy_sound'] = pygame.mixer.Sound('referencia/assets/snd/expl6.wav')
+assets['pew_sound'] = pygame.mixer.Sound('referencia/assets/snd/pew.wav')
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -170,7 +170,8 @@ while game:
     hits = pygame.sprite.groupcollide(all_meteors, all_bullets, True, True)
     for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
         # O meteoro e destruido e precisa ser recriado
-        destroy_sound.play()
+        assets['destroy_sound'].play()
+
         m = Meteor(assets)
         all_sprites.add(m)
         all_meteors.add(m)
@@ -179,7 +180,7 @@ while game:
     hits = pygame.sprite.spritecollide(player, all_meteors, True)
     if len(hits) > 0:
         # Toca o som da colisão
-        boom_sound.play()
+        assets['boom_sound'].play()
         time.sleep(1) # Precisa esperar senão fecha
 
         game = False
