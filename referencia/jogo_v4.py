@@ -14,7 +14,7 @@ pygame.display.set_caption('Hello World!')
 game = True
 
 # ----- Inicia assets
-image = pygame.image.load('assets/img/logo-madfox.png').convert()
+image = pygame.image.load('referencia/assets/img/logo-madfox.png').convert()
 image = pygame.transform.scale(image, (125, 166))
 
 # ===== Loop principal =====
