@@ -15,17 +15,17 @@ pygame.display.set_caption('Navinha')
 METEOR_WIDTH = 50
 METEOR_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img_small = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
 
 # ----- Inicia estruturas de dados
 game = True
-meteor_x = 200
+meteor_x = random.randint(0, WIDTH-METEOR_WIDTH)
 # y negativo significa que está acima do topo da janela. O meteoro começa fora da janela
-meteor_y = -METEOR_HEIGHT
-meteor_speedx = 3
-meteor_speedy = 4
+meteor_y = random.randint(-100, -METEOR_HEIGHT)
+meteor_speedx = random.randint(-3, 3)
+meteor_speedy = random.randint(2, 9)
 
 # ===== Loop principal =====
 while game:
@@ -41,8 +41,8 @@ while game:
     meteor_y += meteor_speedy
     # Se o meteoro passar do final da tela, volta para cima
     if meteor_y > HEIGHT or meteor_x + METEOR_WIDTH < 0 or meteor_x > WIDTH:
-        meteor_x = 200
-        meteor_y = -METEOR_HEIGHT
+        meteor_x = random.randint(0, WIDTH-METEOR_WIDTH)
+        meteor_y = random.randint(-100, -METEOR_HEIGHT) 
 
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
