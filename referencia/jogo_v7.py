@@ -15,8 +15,8 @@ pygame.display.set_caption('Navinha')
 METEOR_WIDTH = 50
 METEOR_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
 
 # ----- Inicia estruturas de dados
@@ -53,6 +53,8 @@ FPS = 30
 # Criando dois meteoros
 meteor1 = Meteor(meteor_img)
 meteor2 = Meteor(meteor_img)
+meteor3 = Meteor(meteor_img)
+meteor4 = Meteor(meteor_img)
 
 # ===== Loop principal =====
 while game:
@@ -68,6 +70,8 @@ while game:
     # Atualizando a posição dos meteoros
     meteor1.update()
     meteor2.update()
+    meteor3.update()
+    meteor4.update()
 
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
@@ -75,6 +79,8 @@ while game:
     # Desenhando meteoros
     window.blit(meteor1.image, meteor1.rect)
     window.blit(meteor2.image, meteor2.rect)
+    window.blit(meteor3.image, meteor3.rect)
+    window.blit(meteor4.image, meteor4.rect)
 
     pygame.display.update()  # Mostra o novo frame para o jogador
 
