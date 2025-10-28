@@ -15,8 +15,8 @@ pygame.display.set_caption('Navinha')
 METEOR_WIDTH = 50
 METEOR_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img_small = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
 
 # ----- Inicia estruturas de dados
@@ -32,7 +32,7 @@ meteor_speedx = random.randint(-3, 3)
 meteor_speedy = random.randint(2, 9)
 # Variável para o ajuste de velocidade
 clock = pygame.time.Clock()
-FPS = 15
+FPS = 30
 
 # ===== Loop principal =====
 while game:
