@@ -15,6 +15,7 @@ game = True
 
 # ----- Inicia assets
 image = pygame.image.load('assets/img/logo-madfox.png').convert()
+image = pygame.transform.scale(image, (125, 166))
 
 # ===== Loop principal =====
 while game:

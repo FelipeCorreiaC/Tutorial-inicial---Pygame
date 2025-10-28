@@ -13,7 +13,8 @@ game = True
 
 # ----- Inicia assets
 font = pygame.font.SysFont(None, 48)
-text = font.render('HELLO WORLD', True, (0, 0, 255))
+text = font.render('HELLO', True, (0, 0, 255))
+text2 = font.render('WORLD', True, (0, 0, 255))
 
 # ===== Loop principal =====
 while game:
@@ -26,6 +27,7 @@ while game:
     # ----- Gera saídas
     window.fill((255, 255, 255))  # Preenche com a cor branca
     window.blit(text, (10, 10))
+    window.blit(text2, (100, 100))
 
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
