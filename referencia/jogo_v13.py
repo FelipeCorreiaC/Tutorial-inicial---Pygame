@@ -19,19 +19,19 @@ METEOR_HEIGHT = 38
 SHIP_WIDTH = 50
 SHIP_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
-ship_img = pygame.image.load('assets/img/playerShip1_orange.png').convert_alpha()
+ship_img = pygame.image.load('referencia/assets/img/playerShip1_orange.png').convert_alpha()
 ship_img = pygame.transform.scale(ship_img, (SHIP_WIDTH, SHIP_HEIGHT))
-bullet_img = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
+bullet_img = pygame.image.load('referencia/assets/img/laserRed16.png').convert_alpha()
 
 # Carrega os sons do jogo
-pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.load('referencia/assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
 pygame.mixer.music.set_volume(0.4)
-boom_sound = pygame.mixer.Sound('assets/snd/expl3.wav')
-destroy_sound = pygame.mixer.Sound('assets/snd/expl6.wav')
-pew_sound = pygame.mixer.Sound('assets/snd/pew.wav')
+boom_sound = pygame.mixer.Sound('referencia/assets/snd/expl3.wav')
+destroy_sound = pygame.mixer.Sound('referencia/assets/snd/expl6.wav')
+pew_sound = pygame.mixer.Sound('referencia/assets/snd/pew.wav')
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -166,6 +166,7 @@ while game:
     # Verifica se houve colisão entre tiro e meteoro
     hits = pygame.sprite.groupcollide(all_meteors, all_bullets, True, True)
     for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
+        destroy_sound.play()
         # O meteoro e destruido e precisa ser recriado
         m = Meteor(meteor_img)
         all_sprites.add(m)
