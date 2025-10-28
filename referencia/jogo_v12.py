@@ -17,12 +17,12 @@ METEOR_HEIGHT = 38
 SHIP_WIDTH = 50
 SHIP_HEIGHT = 38
 font = pygame.font.SysFont(None, 48)
-background = pygame.image.load('assets/img/starfield.png').convert()
-meteor_img = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+background = pygame.image.load('referencia/assets/img/starfield.png').convert()
+meteor_img = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 meteor_img = pygame.transform.scale(meteor_img, (METEOR_WIDTH, METEOR_HEIGHT))
-ship_img = pygame.image.load('assets/img/playerShip1_orange.png').convert_alpha()
+ship_img = pygame.image.load('referencia/assets/img/playerShip1_orange.png').convert_alpha()
 ship_img = pygame.transform.scale(ship_img, (SHIP_WIDTH, SHIP_HEIGHT))
-bullet_img = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
+bullet_img = pygame.image.load('referencia/assets/img/laserRed16.png').convert_alpha()
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -150,6 +150,13 @@ while game:
     # ----- Atualiza estado do jogo
     # Atualizando a posição dos meteoros
     all_sprites.update()
+    # ---- Colisão bala x meteoro: remove bala e meteoro ao colidir
+    hits_bullets = pygame.sprite.groupcollide(all_bullets, all_meteors, True, True)
+    if hits_bullets:
+        # exemplo: printar quantidade de colisões
+        # total_colisoes = sum(len(v) for v in hits_bullets.values())
+        # print(f'Colisões bala/meteoro: {total_colisoes}')
+        pass
 
     # Verifica se houve colisão entre nave e meteoro
     hits = pygame.sprite.spritecollide(player, all_meteors, True)
