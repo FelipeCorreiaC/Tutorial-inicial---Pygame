@@ -18,28 +18,28 @@ METEOR_HEIGHT = 38
 SHIP_WIDTH = 50
 SHIP_HEIGHT = 38
 assets = {}
-assets['background'] = pygame.image.load('assets/img/starfield.png').convert()
-assets['meteor_img'] = pygame.image.load('assets/img/meteorBrown_med1.png').convert_alpha()
+assets['background'] = pygame.image.load('referencia/assets/img/starfield.png').convert()
+assets['meteor_img'] = pygame.image.load('referencia/assets/img/meteorBrown_med1.png').convert_alpha()
 assets['meteor_img'] = pygame.transform.scale(assets['meteor_img'], (METEOR_WIDTH, METEOR_HEIGHT))
-assets['ship_img'] = pygame.image.load('assets/img/playerShip1_orange.png').convert_alpha()
+assets['ship_img'] = pygame.image.load('referencia/assets/img/playerShip1_orange.png').convert_alpha()
 assets['ship_img'] = pygame.transform.scale(assets['ship_img'], (SHIP_WIDTH, SHIP_HEIGHT))
-assets['bullet_img'] = pygame.image.load('assets/img/laserRed16.png').convert_alpha()
+assets['bullet_img'] = pygame.image.load('referencia/assets/img/laserRed16.png').convert_alpha()
 explosion_anim = []
 for i in range(9):
     # Os arquivos de animação são numerados de 00 a 08
-    filename = 'assets/img/regularExplosion0{}.png'.format(i)
+    filename = 'referencia/assets/img/regularExplosion0{}.png'.format(i)
     img = pygame.image.load(filename).convert()
     img = pygame.transform.scale(img, (32, 32))
     explosion_anim.append(img)
 assets["explosion_anim"] = explosion_anim
-assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
+assets["score_font"] = pygame.font.Font('referencia/assets/font/PressStart2P.ttf', 28)
 
 # Carrega os sons do jogo
-pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.load('referencia/assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
 pygame.mixer.music.set_volume(0.4)
-assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
-assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
-assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+assets['boom_sound'] = pygame.mixer.Sound('referencia/assets/snd/expl3.wav')
+assets['destroy_sound'] = pygame.mixer.Sound('referencia/assets/snd/expl6.wav')
+assets['pew_sound'] = pygame.mixer.Sound('referencia/assets/snd/pew.wav')
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -213,6 +213,9 @@ keys_down = {}
 score = 0
 lives = 3
 
+# Próximo score no qual o jogador ganha 1 vida automaticamente
+next_extra_life = 1000
+
 # ===== Loop principal =====
 pygame.mixer.music.play(loops=-1)
 while state != DONE:
@@ -264,6 +267,11 @@ while state != DONE:
 
             # Ganhou pontos!
             score += 100
+            # Verifica se alcançou (ou ultrapassou) o próximo limiar para ganhar 1 vida.
+            # Usa while para cobrir o caso em que o score pula múltiplos de 1000 numa só passagem.
+            while score >= next_extra_life:
+                lives += 1
+                next_extra_life += 1000
 
         # Verifica se houve colisão entre nave e meteoro
         hits = pygame.sprite.spritecollide(player, all_meteors, True)
